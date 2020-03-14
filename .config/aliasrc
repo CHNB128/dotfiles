@@ -1,0 +1,74 @@
+#!/bin/sh
+
+alias cat="bat"
+alias vi="nvim"
+alias l="k -ha"
+alias rm="rm -I --preserve-root"
+alias cp="cp -i"
+alias ln="ln -i"
+alias mv="mv -i"
+alias chown="chown --preserve-root"
+alias chmod="chmod --preserve-root"
+alias chgrp="chgrp --preserve-root"
+alias mkdir="mkdir -pv"
+alias mount="mount | column -t"
+alias df="df -H"
+alias du="du -ch"
+alias rmf="rm -Rf"
+
+if command -v fzy > /dev/null; then
+  alias fd="find . | fzy"
+fi
+
+if command -v colordiff > /dev/null; then
+  alias diff="colordiff"
+fi
+
+# file
+alias metadata="exiftool"
+
+# network
+alias ports="ss -tlnp"
+
+alias process="ps aux"
+
+# power managment
+alias reboot="sudo /sbin/reboot"
+alias poweroff="sudo /sbin/poweroff"
+alias halt="sudo /sbin/halt"
+alias shutdown="sudo /sbin/shutdown"
+
+# iptables
+alias ipt='sudo /sbin/iptables'
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias firewall=iptlist
+
+# debian
+if [[ $DISTRIB_ID == ubuntu ]];then
+  alias apt="apt-get"
+  alias update="sudo apt-get --yes"
+  alias upgrade="sudo apt-get update && sudo apt-get upgrade"
+fi
+
+# archlinux
+if [[ $OS == "Arch linux" ]];then
+  alias pacman-list="pacman -Qe"
+  alias pacman-autoremove="sudo pacman -R $(pacman -Qdtq)"
+fi
+
+# adb (android debug bridge)
+if [[ $(command -v adb) ]];then
+  alias adb-restart="sudo adb kill-server && sudo adb start-server && adb devices"
+fi
+
+# Yadm
+if [[ $(command -v yadm) ]];then
+  alias yadm="yadm -Y $YADM_DIR"
+fi
+
+# exercism
+alias exercism="HOME=$XDG_DATA_HOME exercism"
+

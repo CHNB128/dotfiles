@@ -1,0 +1,3 @@
+.config/nvim/plugged/
+.lein/self-installs
+.lein/repl-history

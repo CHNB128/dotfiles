@@ -1,0 +1,9 @@
+/** Configured For Applets **/
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "Papirus";
+  yoffset: -50;
+  xoffset: -20;
+}
+@import "/usr/share/rofi/themes/android_notification.rasi"

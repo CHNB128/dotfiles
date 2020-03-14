@@ -1,0 +1,121 @@
+#!/bin/sh
+
+# Define system type
+if [ -f /etc/os-release ]; then
+  # freedesktop.org and systemd
+  . /etc/os-release
+  OS=$NAME
+  VER=$VERSION_ID
+elif type lsb_release >/dev/null 2>&1; then
+  # linuxbase.org
+  OS=$(lsb_release -si)
+  VER=$(lsb_release -sr)
+elif [ -f /etc/lsb-release ]; then
+  # For some versions of Debian/Ubuntu without lsb_release command
+  . /etc/lsb-release
+  OS=$DISTRIB_ID
+  VER=$DISTRIB_RELEASE
+elif [ -f /etc/debian_version ]; then
+  # Older Debian/Ubuntu/etc.
+  OS="Debian"
+  VER=$(cat /etc/debian_version)
+elif [ -f /etc/arch-release ]; then
+  # Older Debian/Ubuntu/etc.
+  OS="Arch Linux"
+  VER=$(cat /etc/arch-release)
+else
+  # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
+  OS=$(uname -s)
+  VER=$(uname -r)
+fi
+export DISTRIB_ID=$OS
+export DISTRIB_RELEASE=$VER
+
+export TERMINAL="termite"
+
+# XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_BIN_HOME="$HOME/.local/bin"
+export XDG_LIB_HOME="$HOME/.local/lib"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+export EDITOR="nvim"
+
+export PATH="$XDG_BIN_HOME:$PATH"
+
+################################################################################
+# Rust
+################################################################################
+export PATH="$PATH:$HOME/.cargo/bin"
+
+################################################################################
+# LinuxBrew
+################################################################################
+export LINUXBREW_HOME="/home/linuxbrew"
+if [ -d $LINUXBREW_HOME ]; then
+  export PATH="$PATH:$LINUXBREW_HOME/bin"
+  export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+  export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+fi
+
+################################################################################
+# PHP
+################################################################################
+# Composer
+export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+
+# Yarn
+export PATH="$PATH:$HOME/.yarn/bin"
+
+################################################################################
+# GTK
+################################################################################
+export GTK_THEME=Adwaita:dark
+
+################################################################################
+# Golang
+################################################################################
+#export GOPATH="$XDG_DATA_HOME/go"
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
+
+################################################################################
+# Ruby
+################################################################################
+if [ $(command -v ruby) ]; then
+  export PATH=$PATH:$GEM_HOME/bin
+  export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+fi
+
+################################################################################
+# Haskell
+################################################################################
+export STACK_ROOT=$XDG_DATA_HOME/stack
+
+################################################################################
+# Android
+################################################################################
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+################################################################################
+# Vim (Cli Text editor)
+################################################################################
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
+
+# Yadm
+export YADM_DIR="$XDG_DATA_HOME/yadm"
+
+################################################################################
+# NVM
+################################################################################
+export NVM_DIR="$HOME/.config"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+################################################################################
+# SSH AGENT
+################################################################################
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
