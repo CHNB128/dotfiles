@@ -1,0 +1,58 @@
+theme = "slick"
+icons = "awesome"
+
+[[block]]
+block = "net"
+device = "wlp3s0"
+ssid = true
+signal_strength = true
+ip = true
+speed_up = false
+graph_up = true
+interval = 5
+use_bits = false
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+show_percentage = true
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "battery"
+interval = 10
+device = "BAT1"
+format = "{percentage}% {time}"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m}"
+
+[[block]]
+block = "sound"
+on_click = "amixer -D pulse set Master 1+ toggle"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
