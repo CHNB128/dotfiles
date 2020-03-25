@@ -3,7 +3,7 @@
 setxkbmap -option grp:caps_toggle us,ru
 
 powerline-daemon -q &
-compton -b &
+compton --config ~/.config/compton/compton.conf -b &
 guake &
 blueman-applet &
 ~/.fehbg &
