@@ -4,6 +4,7 @@ yay -S \
   rofi-git \
   mantablockscreen \
   i3 \
+  i3status-rust \
   xorg \
   neovim \
   compton \
