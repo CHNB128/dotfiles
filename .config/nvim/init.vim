@@ -31,6 +31,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
   Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
   Plug 'vim-scripts/paredit.vim', { 'for': 'clojure' }
+  Plug 'bhurlow/vim-parinfer', { 'for': 'clojure' }
   " Color theme
   Plug 'dracula/vim', { 'as': 'dracula' }
   " Git
@@ -313,6 +314,15 @@ augroup AutoWrite
   autocmd! BufLeave * :write
   autocmd! BufLeave * :update
 augroup END
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto reload config
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has ('autocmd') " Remain compatible with earlier versions
+ augroup vimrc     " Source vim configuration upon save
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup END
+endif " has autocmd
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
