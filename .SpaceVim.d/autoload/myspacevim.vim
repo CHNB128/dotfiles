@@ -16,5 +16,7 @@ function! myspacevim#before() abort
     autocmd! BufLeave * :write
     autocmd! BufLeave * :update
   augroup END
+  " Custom maping
+  call SpaceVim#custom#SPC('nore', ['w', 'q'], 'q', 'close-current-buffer', 1)
 endfunction
 
