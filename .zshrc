@@ -55,3 +55,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Direnv
 eval "$(direnv hook zsh)"
 
+
+[ -f ~/.sman/sman.rc ] && source ~/.sman/sman.rc
+
+export PATH=$PATH:~/.sman/bin
