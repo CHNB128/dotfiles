@@ -1,0 +1,4 @@
+gen:
+  do: exec
+  desc: Generate gitignore file by pecific requirements
+  command: add-gitignore || yarn global add --prefix ~/.local add-gitignore

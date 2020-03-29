@@ -1,0 +1,13 @@
+config:default:
+  do: exec
+  desc: set config to default state
+  command: cat /etc/proxychains.conf > $HOME/.proxychains.conf
+config:proxy:update:
+  do: exec
+  desc: update proxt list
+  command: >
+    cat .proxychains.conf
+    | grep "\[ProxyList\]" -B 999
+    > $HOME/.proxychains.conf
+    &&
+    proxylist >> $HOME/.proxychains.conf

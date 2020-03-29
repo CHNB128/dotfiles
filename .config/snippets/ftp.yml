@@ -1,0 +1,4 @@
+mount:
+  do: exec
+  desc: mount remote folder by ftp
+  command: curlftpfs <<ip>> <<local_folder>> -o user=<<user>>:<<password>>

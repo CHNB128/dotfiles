@@ -1,0 +1,8 @@
+ports:
+  do: exec
+  desc: show open ports
+  command: ss -tlp
+map:local:
+  do: exec
+  desc: map local network
+  command: nmap -sn <<ipmask>>/24 

@@ -1,0 +1,8 @@
+system:info:
+  do: exec
+  desc: Get system information
+  command: >
+    echo 'OS-RELEASE';
+    cat /etc/os-release
+    echo 'UNAME';
+    uname -a

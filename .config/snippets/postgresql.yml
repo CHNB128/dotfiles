@@ -1,0 +1,12 @@
+---
+postgresql:watch:
+  do: copy
+  desc: postgresql version of mysqladmin -i 2 proc
+  command: watch \"psql -P pager -c 'select datname,pid,usename,waiting,state,query from pg_stat_activity;' tasks\"
+search:cloumn:
+  do: copy
+  desc: search column in all tables
+  command: >
+    select table_name, column_name
+    from information_schema.columns
+    where column_name ilike '%<<column>>%'

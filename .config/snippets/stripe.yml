@@ -1,0 +1,5 @@
+---
+get:oauth-code:
+  do: exec
+  desc: Get code for OAuth
+  command: curl "https://connect.stripe.com/oauth/authorize?response_type=code&client_id=<<account_id>>&scope=read_write"

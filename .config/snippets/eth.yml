@@ -1,0 +1,19 @@
+network:private:init:
+  do: exec
+  desc: init private network
+  command: >
+    geth
+      --datadir ~/<<directory_name(.ethereum_private)>>
+      init ~/.eth/dev/genesis.json
+console:private:
+  do: exec
+  desc: start console in private network
+  command: >
+    geth
+      --fast
+      --cache <<cache_size(512)>>
+      --ipcpath ~/Library/Ethereum/geth.ipc
+      --networkid <<network_id(12345)>>
+      --datadir ~/<<directory_name(.ethereum_private)>>
+      console
+

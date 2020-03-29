@@ -1,0 +1,7 @@
+copy:remote:
+  do: exec
+  desc: copy remote file to local
+  command: >
+    scp
+      <<remote_host>>:<<source>>
+      <<local_file_path>>

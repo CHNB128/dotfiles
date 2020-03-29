@@ -1,0 +1,4 @@
+download:extension:
+  do: exec
+  desc: download extension
+  command: wget 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=48.0&x=id%3D<<extensionID>>%26installsource%3Dondemand%26uc'

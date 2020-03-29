@@ -1,0 +1,16 @@
+remove:unused:
+  do: exec
+  desc: remove unused package
+  command: sudo pacman -Rsc $(pacman -Qdtq)
+update:
+  do: exec
+  desc: dist update
+  command: sudo pacman -Syu
+search:
+  do: exec
+  desc: search non instaled package
+  command: sudo pacman -Ss <<package>>
+search:instaled:
+  do: exec
+  desc: search installed package
+  command: sudo pacman -Qs <<package>>

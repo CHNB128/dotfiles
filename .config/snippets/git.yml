@@ -1,0 +1,20 @@
+branch:to:master:
+  do: exec
+  desc: make branche a master branch
+  command: >
+    git checkout <<branch>>;
+    git merge --strategy=ours master;
+    git checkout master;
+    git merge <<branch>>;
+merge:repositories:
+  do: exec
+  desc: merge repo to current branch
+  command: >
+    git remote add <<repo_name>> <<repo_url>>;
+    git fetch <<repo_name>>;
+    git merge --allow-unrelated-histories <<repo_name>>/<<branch(master)>>;
+    git remote remove <<repo_name>>;
+install:github:
+  do: exec
+  desc: install package from github repo
+  command: <<package_manager(npm|yarn)>> install github:<<github_username>>/<<github_repo>>[<<commit_ish>>]

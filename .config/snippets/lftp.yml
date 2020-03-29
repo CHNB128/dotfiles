@@ -1,0 +1,18 @@
+upload:
+  do: exec
+  desc: Upload file from remote dir over ftp
+  command: >
+    lftp -e 'mirror -c -e -R <<source>> <<dest>>'
+    -u <<user>>,<<password>>
+    <<ip>>
+download:
+  do: exec
+  desc: Download file from remote dir over ftp
+  command: >
+    lftp
+      ftp://<<user>>@<<ip>>
+      -e "
+        set ftp:ssl-allow no;
+        mirror <<source>> <<dest>>;
+        quit
+      "

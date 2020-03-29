@@ -1,0 +1,4 @@
+adb:restart:
+  do: exec
+  desc: restart adb server
+  command: sudo adb kill-server && sudo adb start-server && sudo adb devices &&

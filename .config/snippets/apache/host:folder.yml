@@ -1,0 +1,10 @@
+host:folder:
+  do: exec
+  desc: host folder from fs
+  command: >
+    docker run
+      -dit
+      --name <<container_name>>
+      -p <<port>>:80
+      -v <<folder>>:/usr/local/apache2/htdocs/
+      httpd:2.4

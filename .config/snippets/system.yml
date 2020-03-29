@@ -1,0 +1,4 @@
+grafical-card:
+  do: exec
+  desc: show grafical card info
+  command: lspci -k | grep -A 2 -E "(VGA|3D)"

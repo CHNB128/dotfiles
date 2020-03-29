@@ -1,0 +1,4 @@
+convert:
+  do: exec
+  desc: Convert to default charset
+  command: iconv -f "$(enca -iL russian <<file>>)"

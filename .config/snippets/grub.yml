@@ -1,0 +1,12 @@
+update:
+  do: exec
+  desc: Update grub config
+  command: sudo grub-mkconfig -o /boot/grub/grub.cfg
+config:
+  do: exec
+  desc: open grub config editor
+  command: sudo <<editor>> /etc/default/grub
+menu:conifg:
+  do: exec
+  desc: grub menu entries configuration
+  command: sudo <<editor>> /etc/grub.d/40_custom

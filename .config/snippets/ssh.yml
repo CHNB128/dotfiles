@@ -1,0 +1,9 @@
+tunel:local:
+  do: exec
+  desc: Create ssh tunel
+  command:
+    ssh
+      -nNT
+      -L
+      <<local_port>>:localhost:<<remote_port>>
+      <<remote_user>>@<<remote_ip>>
