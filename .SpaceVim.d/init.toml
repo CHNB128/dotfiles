@@ -72,3 +72,6 @@
 [[custom_plugins]]
   name = "vim-scripts/paredit.vim"
   on_ft = "clojure"
+
+[[custom_plugins]]
+  name = "tpope/vim-fugitive"
