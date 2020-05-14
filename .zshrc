@@ -34,7 +34,7 @@ if [[ -f $XDG_CONFIG_HOME/antigen.zsh ]]; then
 	antigen bundle CHNB128/enhancd
 
 	# Load the theme.
-	antigen theme denysdovhan/spaceship-prompt
+  antigen theme denysdovhan/spaceship-prompt
 
 	# Tell Antigen that you're done.
 	antigen apply
@@ -49,13 +49,9 @@ fi
 [[ -f $XDF_CONFIG_HOME/autostart ]] && source $XDG_CONFIG_HOME/autostart
 [[ -f $HOME/.rvm/scripts/rvm ]] && source "$HOME/.rvm/scripts/rvm"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# Direnv
-eval "$(direnv hook zsh)"
-
-
 [ -f ~/.sman/sman.rc ] && source ~/.sman/sman.rc
 
 export PATH=$PATH:~/.sman/bin
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
