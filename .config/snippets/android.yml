@@ -2,3 +2,7 @@ adb:restart:
   do: exec
   desc: restart adb server
   command: sudo adb kill-server && sudo adb start-server && sudo adb devices &&
+adb:call:
+  do: exec
+  desc: call by adb from device
+  command: adb shell am start -a android.intent.action.CALL -d <<link>>

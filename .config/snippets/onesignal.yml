@@ -1,0 +1,9 @@
+test:
+  do: exec
+  desc: Test reqest to onesignal
+  command: >
+    curl \
+      -X POST \
+      -H "Authorization: Basic <<rest_api_key>>; Content-Type: application/json" \
+      --data '{"app_id": "<<app_id>>", "contents": <<contents>>, "included_segments": ["ALL"]}' \
+      https://onesignal.com/api/v1/notifications
