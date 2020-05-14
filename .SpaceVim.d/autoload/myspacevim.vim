@@ -18,5 +18,13 @@ function! myspacevim#before() abort
   augroup END
   " Custom maping
   call SpaceVim#custom#SPC('nore', ['w', 'q'], 'q', 'close-current-buffer', 1)
+  " Fireplace #clojure
+  call SpaceVim#custom#SPCGroupName(['u'], '+Fireplace')
+  call SpaceVim#custom#SPC('nore' , ['u' , 'e'] , '%Eval'            , 'clojure-eval-file'    , 1)
+  call SpaceVim#custom#SPC('nore' , ['u' , 'E'] , 'CljEval (all-ns)' , 'clojure-eval-all-ns'  , 1)
+  call SpaceVim#custom#SPC('nore' , ['u' , 'r'] , 'Require'          , 'clojure-require-file' , 1)
+  call SpaceVim#custom#SPC('nore' , ['u' , 'R'] , 'Require!'         , 'clojure-require-all'  , 1)
+  call SpaceVim#custom#SPC('nore' , ['u' , 't'] , 'RunTests'         , 'clojure-test-ns'      , 1)
+  call SpaceVim#custom#SPC('nore' , ['u' , 'T'] , 'RunAllTests'      , 'clojure-test-all'     , 1)
+  call SpaceVim#custom#SPC('nore' , ['u' , 'c'] , 'Fireplace'        , 'clojure-connect'      , 1)
 endfunction
-

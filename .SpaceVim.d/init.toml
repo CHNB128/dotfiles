@@ -23,9 +23,11 @@
   # only color will be changed when switch modes.
   enable_statusline_mode = false
   bootstrap_before = "myspacevim#before"
+  bootstrap_after = "myspacevim#after"
   filemanager = "nerdtree"
   filetree_direction = "left"
   max_column = 80
+  vimcompatible = true
   enable_guicolors = false
 
 # Enable autocomplete layer
