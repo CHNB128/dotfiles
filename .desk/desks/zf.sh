@@ -6,6 +6,8 @@
 
 cd ~/src/urbest/z-frontend
 
+export STRIPE_CLIENT_ID=ca_G10bZC5qzgLiOKcuVZ15FT9CVXSqBHB3
+
 # Start for web
 web() {
   clj -R:repl build.clj figwheel -p web

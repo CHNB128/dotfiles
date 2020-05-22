@@ -10,6 +10,9 @@ function! myspacevim#before() abort
   noremap <silent> <ESC> :noh <CR>
   " Trim trailing space on save
   autocmd BufWritePre * :%s/\s\+$//e
+  " Strip trailing empty newlines
+  " NOTE: has side effect, move cursor to end of file on call
+  " autocmd BufWritePre * $put _ | $;?\(^\s*$\)\@!?+1,$d
   " Auto save on focuse lost
   set autowrite
   augroup AutoWrite
