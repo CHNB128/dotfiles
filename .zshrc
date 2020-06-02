@@ -44,6 +44,10 @@ if [[ $(command -v direnv) ]]; then
 	eval "$(direnv hook zsh)"
 fi
 
+if [[ $(command -v bw) ]]; then
+  eval "$(bw completion --shell zsh); compdef _bw bw;"
+fi
+
 [[ -f $XDG_CONFIG_HOME/ssh/sshrc ]] && source $XDG_CONFIG_HOME/ssh/sshrc
 [[ -f $XDG_CONFIG_HOME/aliasrc ]] && source $XDG_CONFIG_HOME/aliasrc
 [[ -f $XDF_CONFIG_HOME/autostart ]] && source $XDG_CONFIG_HOME/autostart
