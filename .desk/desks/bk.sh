@@ -24,6 +24,14 @@ database_restore() {
   psql -d postgres -h localhost -p 5432 -U postgres -W < $1
 }
 
+database_local() {
+  pgcli -h localhost -U postgres -W
+}
+
+database_stage() {
+  pgcli -h test-db.c9wcr7bm7aba.eu-west-3.rds.amazonaws.com -U root -d testdb -W
+}
+
 # Start repl
 repl() {
   lein repl
@@ -37,3 +45,5 @@ lint() {
 alias reset='database_reset'
 alias dump='database_dump'
 alias restore='database_restore'
+alias db-local='database_local'
+alias db-stage='database_stage'
