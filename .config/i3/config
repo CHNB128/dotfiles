@@ -146,27 +146,27 @@ bindsym $mod+Shift+g exec --no-startup-id i3-assign-workspace-to-group
 bindsym $mod+t exec --no-startup-id i3-focus-on-workspace
 bindsym Mod1+Mod4+n exec --no-startup-id i3-rename-workspace
 
-bindsym $mod+1 $exec_i3_groups workspace-number 1
-bindsym $mod+2 $exec_i3_groups workspace-number 2
-bindsym $mod+3 $exec_i3_groups workspace-number 3
-bindsym $mod+4 $exec_i3_groups workspace-number 4
-bindsym $mod+5 $exec_i3_groups workspace-number 5
-bindsym $mod+6 $exec_i3_groups workspace-number 6
-bindsym $mod+7 $exec_i3_groups workspace-number 7
-bindsym $mod+8 $exec_i3_groups workspace-number 8
-bindsym $mod+9 $exec_i3_groups workspace-number 9
-bindsym $mod+0 $exec_i3_groups workspace-number 10
+bindsym $mod+1 $exec_i3_groups workspace-number "1"
+bindsym $mod+2 $exec_i3_groups workspace-number "2"
+bindsym $mod+3 $exec_i3_groups workspace-number "3"
+bindsym $mod+4 $exec_i3_groups workspace-number "4"
+bindsym $mod+5 $exec_i3_groups workspace-number "5"
+bindsym $mod+6 $exec_i3_groups workspace-number "6"
+bindsym $mod+7 $exec_i3_groups workspace-number "7"
+bindsym $mod+8 $exec_i3_groups workspace-number "8"
+bindsym $mod+9 $exec_i3_groups workspace-number "9"
+bindsym $mod+0 $exec_i3_groups workspace-number "10"
 
-bindsym $mod+Shift+1 $exec_i3_groups move-to-number 1
-bindsym $mod+Shift+2 $exec_i3_groups move-to-number 2
-bindsym $mod+Shift+3 $exec_i3_groups move-to-number 3
-bindsym $mod+Shift+4 $exec_i3_groups move-to-number 4
-bindsym $mod+Shift+5 $exec_i3_groups move-to-number 5
-bindsym $mod+Shift+6 $exec_i3_groups move-to-number 6
-bindsym $mod+Shift+7 $exec_i3_groups move-to-number 7
-bindsym $mod+Shift+8 $exec_i3_groups move-to-number 8
-bindsym $mod+Shift+9 $exec_i3_groups move-to-number 9
-bindsym $mod+Shift+0 $exec_i3_groups move-to-number 10
+bindsym $mod+Shift+1 $exec_i3_groups move-to-number "1"
+bindsym $mod+Shift+2 $exec_i3_groups move-to-number "2"
+bindsym $mod+Shift+3 $exec_i3_groups move-to-number "3"
+bindsym $mod+Shift+4 $exec_i3_groups move-to-number "4"
+bindsym $mod+Shift+5 $exec_i3_groups move-to-number "5"
+bindsym $mod+Shift+6 $exec_i3_groups move-to-number "6"
+bindsym $mod+Shift+7 $exec_i3_groups move-to-number "7"
+bindsym $mod+Shift+8 $exec_i3_groups move-to-number "8"
+bindsym $mod+Shift+9 $exec_i3_groups move-to-number "9"
+bindsym $mod+Shift+0 $exec_i3_groups move-to-number "10"
 
 # reload the configuration file
 #bindsym $mod+Shift+c reload
