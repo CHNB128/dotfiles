@@ -56,6 +56,3 @@ fi
 [ -f ~/.sman/sman.rc ] && source ~/.sman/sman.rc
 
 export PATH=$PATH:~/.sman/bin
-
-# Hook for desk activation
-[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
