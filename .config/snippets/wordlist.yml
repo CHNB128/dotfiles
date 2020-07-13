@@ -1,0 +1,24 @@
+remove:duplicates:
+  do: exec
+  desc: Remove duplicates
+  command: awk '!(count[$0]++)' <<input_file>> > <<output_file>>
+
+sort:length:
+  do: exec
+  desc: Sort by length
+  command: awk '{print length, $0}' <<input_file>> | sort -n | cut -d " " -f2- > <<output_file>>
+
+sort:alphabetical:
+  do: exec
+  desc: Sort by alphabetical order
+  command: sort <<input_file>> | uniq > <<output_file>>
+
+merge:
+  do: exec
+  desc: Merge multiple text files into one
+  command: cat <<input_files>> > <<output_file>>
+
+remove:blank:
+  do: exec
+  desc: Remove all blank lines
+  command: egrep -v "^[[:space:]]*$" <<input_file>> > <<output_file>>
