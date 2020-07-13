@@ -54,6 +54,9 @@
   name = "git"
 
 [[layers]]
+  name = "lang#javascript"
+
+[[layers]]
   name = "lang#clojure"
 
 [[layers]]
@@ -64,6 +67,12 @@
 
 [[layers]]
   name = "lang#python"
+
+[[layers]]
+  name = "lang#java"
+
+[[layers]]
+  name = "lang#kotlin"
 
 [[layers]]
   name = "github"
@@ -86,6 +95,10 @@
 [[custom_plugins]]
   name = "vim-scripts/paredit.vim"
   on_ft = "clojure"
+
+[[custom_plugins]]
+  name = "digitaltoad/vim-pug"
+  on_ft = "pug"
 
 [[custom_plugins]]
   name = "tpope/vim-fugitive"
