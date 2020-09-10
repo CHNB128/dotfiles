@@ -72,10 +72,16 @@
   name = "lang#java"
 
 [[layers]]
+  name = "lang#go"
+
+[[layers]]
   name = "lang#kotlin"
 
 [[layers]]
   name = "github"
+
+[[layers]]
+  name = "html"
 
 [[layers]]
   name = "lsp"
