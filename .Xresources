@@ -45,3 +45,13 @@
 *.color13: nord15
 *.color14: nord7
 *.color15: nord6
+
+! Xterm
+
+XTerm.vt100.locale: true
+XTerm.vt100.metaSendsEscape: true
+XTerm*faceName: DejaVu Sans Mono for Powerline
+! XTerm.vt100.faceName: Fira Code 10:antialias=true
+XTerm*faceSize: 10
+XTerm*selectToClipboard: true
+XTerm*termName: xterm-256color
