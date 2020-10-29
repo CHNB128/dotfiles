@@ -1,5 +1,5 @@
 [bar/top]
-monitor = eDP
+monitor = ${env:MONITOR:}
 width = 100%
 height = 34
 
@@ -22,7 +22,7 @@ modules-left= workspaces
 modules-right = volume backlight wireless-network wired-network network-publicip battery date
 
 [bar/bottom]
-monitor = eDP
+monitor = ${env:MONITOR:}
 bottom = true
 width = 100%
 height = 27
