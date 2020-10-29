@@ -1,0 +1,15 @@
+[scripts.adb-restart]
+alias = 'adb-restart'
+command = 'sudo adb kill-server; sudo adb start-server; sudo adb devices'
+tags = [
+    'android',
+    'adb',
+]
+
+[scripts.ports]
+alias = 'ports'
+command = 'netstat -tlnp'
+tags = [
+    'network',
+    'tcp',
+]
