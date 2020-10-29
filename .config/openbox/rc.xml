@@ -178,7 +178,7 @@
     <chainQuitKey>C-g</chainQuitKey>
     <keybind key="W-d">
       <action name="Execute">
-        <command>rofi -combi-modi window,drun,run,ssh -show combi -modi combi</command>
+        <command>rofi -combi-modi window,bookmarks,drun,run,ssh -show combi -modi bookmarks:~/.config/rofi/scripts/bookmarks.sh</command>
       </action>
     </keybind>
     <keybind key="Print">
@@ -221,6 +221,9 @@
         <height>50%</height>
       </action>
       <action name="MoveToEdgeSouth"/>
+    </keybind>
+    <keybind key="W-e">
+      <action name="Decorate"/>
     </keybind>
     <keybind key="S-W-q">
       <action name="Close"/>
