@@ -72,3 +72,11 @@ fi
 # exercism
 alias exercism="HOME=$XDG_DATA_HOME exercism"
 
+# https://crates.io/crates/eureka
+alias idea="eureka"
+
+# https://github.com/pier-cli/pier
+pier_fzf() {
+  pier $(pier list | awk NR\>2 | fzf | awk '{print $1}')
+}
+alias f="pier_fzf"
