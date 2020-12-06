@@ -6,3 +6,7 @@ adb:call:
   do: exec
   desc: call by adb from device
   command: adb shell am start -a android.intent.action.CALL -d <<link>>
+adb:wifi:
+  do: exec
+  desc: add current device to adb over wifi
+  command: adb tcpip 5555 && adb shell "ip addr show wlan0 | grep -e wlan0$ | cut -d\" \" -f 6 | cut -d/ -f 1" && adb connect 192.168.0.102:5555

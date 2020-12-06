@@ -6,6 +6,71 @@ tags = [
     'adb',
 ]
 
+[scripts.socks-proxy]
+alias = 'socks-proxy'
+command = 'echo "Enter address: "; read a; ssh -D 9000 $a;'
+tags = [
+    'proxy',
+    'socks',
+]
+
+[scripts.mysql-query-log]
+alias = 'mysql-query-log'
+command = "echo 'SET global log_output = 'FILE';SET global general_log_file='/tmp/mysql_general.log';SET global general_log = 1;'"
+tags = [
+    'mysql',
+    'log',
+    'performance',
+]
+
+
+[scripts.mysql-slow-query-log]
+alias = 'mysql-slow-query-log'
+command = "echo 'SET global log_output = 'FILE';SET global slow_query_log_file='/tmp/mysql_slow.log';SET global slow_query_log = 1; SET global long_query_time = 2'"
+tags = [
+    'mysql',
+    'log',
+    'performance',
+]
+
+[scripts.change-ttl]
+alias = "cahnge-ttl"
+command = "echo 'Value:'; read v; echo $v | sudo tee /proc/sys/net/ipv4/ip_default_ttl"
+tags = [ "network", 'ttl' ]
+
+[scripts.twa-analyze]
+alias = "twa-analyze"
+command = "docker run --rm -t trailofbits/twa -vw"
+tags = [ "infosec" ]
+
+[scripts.test]
+alias = 'test'
+command = 'echo $1'
+
+[scripts.backup-home]
+alias = 'backup-home'
+command = 'name=$(hostname)_$(date -u +"%Y-%m-%d_%H-%M-%S").backup.tar.gz; sudo tar -czf $name -C /home .'
+tags = [
+    'backup'
+]
+
+[scripts.add-systemd-service]
+alias = 'add-systemd-service'
+command = '''
+          echo "Enter service name:"; \
+          read n; \
+          echo "Enter description:"; \
+          read d; \
+          echo "Enter script path:"; \
+          read p; \
+          echo "[Unit]\nDescription=$d\n[Service]\nExecStrart=$p\n[Install]\nWantedBy=multi-user.targe" | sudo tee /etc/systemd/system/$n.service; \
+          sudo chmod 775 $p;
+    '''
+tags = [
+    'systemd',
+    'service',
+]
+
 [scripts.ports]
 alias = 'ports'
 command = 'netstat -tlnp'

@@ -2,7 +2,7 @@
 
 alias cat="bat"
 alias vi="nvim"
-alias l="k -ha"
+alias l="exa -lah --git --group"
 alias rm="rm -I --preserve-root"
 alias cp="cp -i"
 alias ln="ln -i"
@@ -29,7 +29,6 @@ alias metadata="exiftool"
 
 # network
 alias ports="ss -tlnp"
-
 alias process="ps aux"
 
 # power managment
@@ -57,16 +56,6 @@ fi
 if [[ $OS == "Arch linux" ]];then
   alias pacman-list="pacman -Qe"
   alias pacman-autoremove="sudo pacman -R $(pacman -Qdtq)"
-fi
-
-# adb (android debug bridge)
-if [[ $(command -v adb) ]];then
-  alias adb-restart="sudo adb kill-server && sudo adb start-server && adb devices"
-fi
-
-# Yadm
-if [[ $(command -v yadm) ]];then
-  alias yadm="yadm -Y $YADM_DIR"
 fi
 
 # exercism

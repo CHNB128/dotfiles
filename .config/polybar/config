@@ -47,7 +47,43 @@ font-5 = Termsynu:size=8:antialias=false;0
 
 tray-position = left
 modules-left = bspwm
-modules-right = temperature cpu memory
+modules-right = filesystem ping-info temperature cpu memory
+
+[module/filesystem]
+type = internal/fs
+
+; Mountpoints to display
+mount-0 = /
+
+; Seconds to sleep between updates
+; Default: 30
+interval = 60
+
+; Display fixed precision values
+; Default: false
+fixed-values = true
+
+; Available tokens:
+;   %mountpoint%
+;   %type%
+;   %fsname%
+;   %percentage_free%
+;   %percentage_used%
+;   %total%
+;   %free%
+;   %used%
+; Default: %mountpoint% %percentage_free%%
+label-mounted = %mountpoint%: %percentage_used%%
+
+; Available tokens:
+;   %mountpoint%
+; Default: %mountpoint% is not mounted
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = #55
+
+; Spacing between entries
+; Default: 2
+spacing = 4
 
 [module/backlight]
 type = internal/backlight
@@ -120,6 +156,11 @@ animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-framerate = 750
+
+[module/ping-info]
+type = custom/script
+exec = ~/.config/polybar/scripts/ping-info.sh
+interval = 10
 
 [module/bspwm]
 type = internal/bspwm

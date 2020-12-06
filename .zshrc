@@ -15,12 +15,11 @@ if [[ -f $XDG_CONFIG_HOME/antigen.zsh ]]; then
 
 	# Bundles from the default repo (robbyrussell's oh-my-zsh).
 	antigen bundle git
-  antigen bundle hschne/fzf-git
 	antigen bundle sudo
-	#antigen bundle battery
+	antigen bundle battery
 	antigen bundle command-not-found
 	antigen bundle adb
-	#antigen bundle archlinux
+	antigen bundle archlinux
 	antigen bundle history-substring-search
 
 	antigen bundle "MichaelAquilina/zsh-auto-notify"
@@ -29,7 +28,6 @@ if [[ -f $XDG_CONFIG_HOME/antigen.zsh ]]; then
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
 	antigen bundle zsh-users/zsh-autosuggestions
-	antigen bundle supercrabtree/k
 	antigen bundle gko/ssh-connect
 	antigen bundle CHNB128/enhancd
 
@@ -44,6 +42,10 @@ if [[ $(command -v direnv) ]]; then
 	eval "$(direnv hook zsh)"
 fi
 
+if [[ $(command -v navi) ]]; then
+	eval "$(navi widget zsh)"
+fi
+
 if [[ $(command -v bw) ]]; then
   eval "$(bw completion --shell zsh); compdef _bw bw;"
 fi
@@ -56,3 +58,9 @@ fi
 [ -f ~/.sman/sman.rc ] && source ~/.sman/sman.rc
 
 export PATH=$PATH:~/.sman/bin
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
+
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true

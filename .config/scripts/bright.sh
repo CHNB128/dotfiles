@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Discover monitor name with: xrandr | grep " connected"
 MON=$(xrandr | grep " connected" | cut -f1 -d " ")
