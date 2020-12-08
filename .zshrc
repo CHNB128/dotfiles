@@ -1,14 +1,13 @@
+[[ -f $HOME/.config/envrc ]] && source ~/.config/envrc
+
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
+ANTIGEN_PATH=$XDG_CONFIG_HOME/scripts/antigen.zsh
 
 export AUTO_NOTIFY_THRESHOLD=20
 
-if [[ -f $HOME/.config/envrc ]]; then
-	source ~/.config/envrc
-fi
-
-if [[ -f $XDG_CONFIG_HOME/antigen.zsh ]]; then
-	source $XDG_CONFIG_HOME/antigen.zsh
+if [[ -f $ANTIGEN_PATH ]]; then
+	source $ANTIGEN_PATH
 
 	# Load the oh-my-zsh's library.
 	antigen use oh-my-zsh
@@ -21,6 +20,7 @@ if [[ -f $XDG_CONFIG_HOME/antigen.zsh ]]; then
 	antigen bundle adb
 	antigen bundle archlinux
 	antigen bundle history-substring-search
+  antigen bundle jamesob/desk shell_plugins/zsh
 
 	antigen bundle "MichaelAquilina/zsh-auto-notify"
 	antigen bundle unixorn/autoupdate-antigen.zshplugin
@@ -31,36 +31,24 @@ if [[ -f $XDG_CONFIG_HOME/antigen.zsh ]]; then
 	antigen bundle gko/ssh-connect
 	antigen bundle CHNB128/enhancd
 
-	# Load the theme.
-  antigen theme denysdovhan/spaceship-prompt
-
 	# Tell Antigen that you're done.
 	antigen apply
 fi
 
-if [[ $(command -v direnv) ]]; then
-	eval "$(direnv hook zsh)"
-fi
+[[ $(command -v direnv) ]] && eval "$(direnv hook zsh)"
+[[ $(command -v navi) ]] && eval "$(navi widget zsh)"
+[[ $(command -v bw) ]] && eval "$(bw completion --shell zsh); compdef _bw bw;"
+# https://github.com/starship/starship
+[[ $(command -v starship) ]] && eval "$(starship init zsh)"
 
-if [[ $(command -v navi) ]]; then
-	eval "$(navi widget zsh)"
-fi
-
-if [[ $(command -v bw) ]]; then
-  eval "$(bw completion --shell zsh); compdef _bw bw;"
-fi
 
 [[ -f $XDG_CONFIG_HOME/ssh/sshrc ]] && source $XDG_CONFIG_HOME/ssh/sshrc
 [[ -f $XDG_CONFIG_HOME/aliasrc ]] && source $XDG_CONFIG_HOME/aliasrc
 [[ -f $XDF_CONFIG_HOME/autostart ]] && source $XDG_CONFIG_HOME/autostart
 [[ -f $HOME/.rvm/scripts/rvm ]] && source "$HOME/.rvm/scripts/rvm"
 
-[ -f ~/.sman/sman.rc ] && source ~/.sman/sman.rc
-
-export PATH=$PATH:~/.sman/bin
-
 # Hook for desk activation
 [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
 
-# Hook for desk activation
-[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
