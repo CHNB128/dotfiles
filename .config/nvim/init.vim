@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'dylanaraps/wal'
   " Fuzz finder
   Plug '/usr/bin/fzf'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   " Debug
   "Plug 'vim-vdebug/vdebug'
