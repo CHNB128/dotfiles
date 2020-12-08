@@ -9,24 +9,20 @@ call plug#begin('~/.config/nvim/plugged')
   " JavaScript bundle for vim
   " this bundle provides syntax highlighting and improved indentation.
   Plug 'pangloss/vim-javascript'
-  Plug 'junegunn/limelight.vim'
-  Plug 'dylanaraps/wal'
   " Fuzz finder
   Plug '/usr/bin/fzf'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  " Debug
-  "Plug 'vim-vdebug/vdebug'
   " Bookmark
   Plug 'MattesGroeger/vim-bookmarks'
-  " Minimap
-  Plug 'severin-lemaignan/vim-minimap'
   " Color hightlight
   Plug 'ap/vim-css-color'
   "
   Plug 'tpope/vim-eunuch'
   " File manager
-  Plug 'scrooloose/nerdtree'
+  Plug 'preservim/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'ryanoasis/vim-devicons'
   " Clojure
   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
   Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
@@ -42,23 +38,23 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/powerline'
-  " Nuake
-  Plug 'lenovsky/nuake'
   " Vue
   Plug 'posva/vim-vue'
   Plug 'sekel/vim-vue-syntastic'
   " Syntacsis highlight
   Plug 'vim-syntastic/syntastic'
-  " Code search
-  Plug 'brooth/far.vim'
   " Ident vertical line
   Plug 'Yggdroot/indentLine'
   " Start screen
   Plug 'mhinz/vim-startify'
   " Complementions
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
   " html
   Plug 'alvan/vim-closetag'
   Plug 'mattn/emmet-vim'
@@ -80,61 +76,89 @@ function! s:get_visual_selection()
     return join(lines, "\n")
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Setup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:indentLine_color_term = 239
+" bookmarks
+let g:bookmark_no_default_key_mappings = 1
+let g:bookmark_auto_save_file = $HOME .'/.config/nvim/.bookmarks'
+set clipboard=unnamedplus
+let g:CoolTotalMatches = 1
+" NERDTree
+let NERDTreeShowHidden=1
+" Common
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
+set fileformat=unix
+set fileformats=unix,dos,mac
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Services
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FZF
 command! Search :Ag
 command! -range SearchRange <line1>,<line2> call fzf#vim#ag(s:get_visual_selection())
 command! -range SearchWord <line1>,<line2> call fzf#vim#ag(expand("<cword>"))
-vnoremap <silent> <C-f> :SearchRange<CR>
-nnoremap <silent> <C-f> :SearchWord<CR>
-nnoremap <silent> <space>c :Commands <CR>
-nnoremap <silent> <space>s :Maps <CR>
-nnoremap <silent> <space>b :Buffers <CR>
-nnoremap <silent> <space>f :Files <CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Replace
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>r :s/\<<C-r><C-w>\>//g<Left><Left>
-nnoremap <leader>R :%s/\<<C-r><C-w>\>//g<Left><Left>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Config
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! -bang CurrentBufferDirectoryFiles call fzf#vim#files(expand('%:p:h'), <bang>0)
+" common
 command! ReloadConfig :so $HOME/.config/nvim/init.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mapings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FZF
+vnoremap <silent> <space>ss :SearchRange<CR>
+nnoremap <silent> <space>sw :SearchWord<CR>
+nnoremap <silent> <space>ss :Search<CR>
+nnoremap <silent> <space>?c :Commands <CR>
+nnoremap <silent> <space>?m :Maps <CR>
+nnoremap <silent> <space>b :Buffers <CR>
+nnoremap <silent> <space>ff :Files <CR>
+nnoremap <silent> <space>fd :CurrentBufferDirectoryFiles <CR>
+" Window managment
+nnoremap <silent> <space>ww :update <CR>
+nnoremap <silent> <space>wq :quit <CR>
+nnoremap <silent> <space>ws :split <CR>
+nnoremap <silent> <space>wv :vsplit <CR>
+nnoremap <silent> <space>w<Up> :wincmd k<CR>
+nnoremap <silent> <space>w<Down> :wincmd j<CR>
+nnoremap <silent> <space>w<Right> :wincmd l<CR>
+nnoremap <silent> <space>w<Left> :wincmd h<CR>
+" Tabs
+map <silent> <space>tn :tabnew<CR>
+map <silent> <space>tj :tabprevious<CR>
+map <silent> <space>tk :tabnext<CR>
+map <silent> <space>tq :tabclose<CR>
+" Replace
+nnoremap <space>r :s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <space>R :%s/\<<C-r><C-w>\>//g<Left><Left>
 " EasyAlign
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Limelight
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-"let g:limelight_conceal_ctermfg = 240
-"autocmd VimEnter * Limelight
-"let g:limelight_priority = -1
-"let g:limelight_paragraph_span = 1
-"
+xmap <silent> <space>a <Plug>(EasyAlign)
+nmap <silent> <space>a <Plug>(EasyAlign)
+" Commentary
+map <silent> <space>/ :Commentary<CR>
+" Bookmark
+map <silent> <space>mm :BookmarkToggle<CR>
+map <silent> <space>ma :BookmarkShowAll<CR>
+" Git
+map <silent> <space>gu :GitGutterUndoHunk<CR>
+map <silent> <space>gb :GBlame<CR>
+" NERDTree
+nnoremap <silent> <F3> :NERDTreeToggle <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Movment
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" switch windwo with arrows
-map <silent> <M-Up> :wincmd k<CR>
-map <silent> <M-Down> :wincmd j<CR>
-map <silent> <M-Right> :wincmd l<CR>
-map <silent> <M-Left> :wincmd h<CR>
-
 nnoremap <A-k> :m .-2<CR>==
 nnoremap <A-j> :m .+1<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
-nnoremap <silent> <C-S> :update<CR>
-nnoremap <silent> <C-Z> <C-O> :undo<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Easy motion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -152,27 +176,6 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bookmark
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:bookmark_auto_save_file = $HOME .'/.config/nvim/.bookmarks'
-" To copy to clipboard
-set clipboard=unnamedplus
-" Search
-let g:CoolTotalMatches = 1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Git
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Show GTM in status bar
-let g:gtm_plugin_status_enabled = 1
-
-function! AirlineInit()
-  if exists('*GTMStatusline')
-    call airline#parts#define_function('gtmstatus', 'GTMStatusline')
-    let g:airline_section_b = airline#section#create([g:airline_section_b, ' ', '[', 'gtmstatus', ']'])
-  endif
-endfunction
-autocmd User AirlineAfterInit call AirlineInit()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -196,21 +199,13 @@ if executable(local_eslint)
     let g:syntastic_javascript_eslint_exec = local_eslint
     let g:syntastic_vue_eslint_exec = local_eslint
 endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Complementions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:deoplete#enable_at_startup = 1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color cheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Define color sheme
 color dracula
 " Set color sheme theme
 set bg=dark
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" IdentLine
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_color_term = 239
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -261,13 +256,7 @@ set nowrap
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File ident
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UTF-8 encoding and en_US as default encoding/language
-set encoding=utf-8
 " Define standard filetype
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
-set fileformat=unix
-set fileformats=unix,dos,mac
 " recognize .md files as markdown files
 autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 " enable spell-checking for markdown files
@@ -302,12 +291,6 @@ set smartindent
 " stricter rules for C programs
 set cindent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Nuake
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <M-CR> :Nuake<CR>
-inoremap <M-CR> <C-\><C-n>:Nuake<CR>
-tnoremap <M-CR> <C-\><C-n>:Nuake<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File autosave
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autowrite
@@ -319,43 +302,11 @@ augroup END
 " Auto reload config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has ('autocmd') " Remain compatible with earlier versions
- augroup vimrc     " Source vim configuration upon save
+  augroup vimrc    " Source vim configuration upon save
     autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
 endif " has autocmd
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <A-TAB> :NERDTreeToggle <CR>
-
-let NERDTreeShowHidden=1
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | Startify | endif
-
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('pug', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-closetag
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
