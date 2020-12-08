@@ -3,7 +3,7 @@
 alias cat="bat"
 alias vi="nvim"
 alias l="exa -lah --git --group"
-alias rm="rm -I --preserve-root"
+#alias rm="rm -I --preserve-root"
 alias cp="cp -i"
 alias ln="ln -i"
 alias mv="mv -i"
@@ -15,10 +15,6 @@ alias mount="mount | column -t"
 alias df="df -H"
 alias du="du -ch"
 alias rmf="rm -Rf"
-
-if command -v fzy > /dev/null; then
-  alias fd="find . | fzy"
-fi
 
 if command -v colordiff > /dev/null; then
   alias diff="colordiff"
@@ -63,9 +59,3 @@ alias exercism="HOME=$XDG_DATA_HOME exercism"
 
 # https://crates.io/crates/eureka
 alias idea="eureka"
-
-# https://github.com/pier-cli/pier
-pier_fzf() {
-  pier $(pier list | awk NR\>2 | fzf | awk '{print $1}')
-}
-alias f="pier_fzf"
