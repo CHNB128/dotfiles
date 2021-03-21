@@ -5,7 +5,11 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-surround'
   Plug 'junegunn/vim-easy-align'
-  Plug 'sheerun/vim-polyglot'
+  Plug 'easymotion/vim-easymotion'
+  " Git
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+  " Plug 'sheerun/vim-polyglot'
   " JavaScript bundle for vim
   " this bundle provides syntax highlighting and improved indentation.
   Plug 'pangloss/vim-javascript'
@@ -17,8 +21,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'MattesGroeger/vim-bookmarks'
   " Color hightlight
   Plug 'ap/vim-css-color'
-  "
-  Plug 'tpope/vim-eunuch'
   " File manager
   Plug 'preservim/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -31,16 +33,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'bhurlow/vim-parinfer', { 'for': 'clojure' }
   " Color theme
   Plug 'dracula/vim', { 'as': 'dracula' }
-  " Git
-  Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-fugitive'
   " Airline
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'powerline/powerline'
-  " Vue
-  Plug 'posva/vim-vue'
-  Plug 'sekel/vim-vue-syntastic'
   " Syntacsis highlight
   Plug 'vim-syntastic/syntastic'
   " Ident vertical line
@@ -55,7 +51,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
-  " html
+  " HTML,CSS
+  Plug 'maksimr/vim-jsbeautify'
   Plug 'alvan/vim-closetag'
   Plug 'mattn/emmet-vim'
   Plug 'AndrewRadev/tagalong.vim'
@@ -78,6 +75,13 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Easy motion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0
+" Emmet
+let g:user_emmet_install_global = 0
+" Airline
+let g:airline_powerline_fonts = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:indentLine_color_term = 239
@@ -98,6 +102,8 @@ set fileformats=unix,dos,mac
 " Services
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Emmet
+autocmd FileType html,css EmmetInstall
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,6 +117,8 @@ command! ReloadConfig :so $HOME/.config/nvim/init.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mapings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Easy motion
+nmap s <Plug>(easymotion-overwin-f2)
 " FZF
 vnoremap <silent> <space>ss :SearchRange<CR>
 nnoremap <silent> <space>sw :SearchWord<CR>
@@ -145,9 +153,11 @@ map <silent> <space>/ :Commentary<CR>
 " Bookmark
 map <silent> <space>mm :BookmarkToggle<CR>
 map <silent> <space>ma :BookmarkShowAll<CR>
+map <silent> <space>mh :BookmarkPrev<CR>
+map <silent> <space>ml :BookmarkNext<CR>
 " Git
 map <silent> <space>gu :GitGutterUndoHunk<CR>
-map <silent> <space>gb :GBlame<CR>
+map <silent> <space>gb :Gblame<CR>
 " NERDTree
 nnoremap <silent> <F3> :NERDTreeToggle <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
