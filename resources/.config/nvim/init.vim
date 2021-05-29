@@ -56,6 +56,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'alvan/vim-closetag'
   Plug 'mattn/emmet-vim'
   Plug 'AndrewRadev/tagalong.vim'
+  " Replace
+  Plug 'skwp/greplace.vim'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utils
@@ -144,8 +146,11 @@ map <silent> <space>tj :tabprevious<CR>
 map <silent> <space>tk :tabnext<CR>
 map <silent> <space>tq :tabclose<CR>
 " Replace
-nnoremap <space>r :s/\<<C-r><C-w>\>//g<Left><Left>
-nnoremap <space>R :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <space>rs :Gsearch<CR>
+nnoremap <space>rw :Greplace<CR>
+nnoremap <space>rr :%s/\<\>//g<Left><Left><Left><Left><Left>
+nnoremap <space>rc :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <space>rf :argdo %s/\<<C-r><C-w>\>//g<Left><Left>
 " EasyAlign
 xmap <silent> <space>a <Plug>(EasyAlign)
 nmap <silent> <space>a <Plug>(EasyAlign)
@@ -161,6 +166,7 @@ map <silent> <space>gu :GitGutterUndoHunk<CR>
 map <silent> <space>gb :Git blame<CR>
 map <silent> <space>gk :GitGutterPrevHunk<CR>
 map <silent> <space>gj :GitGutterNextHunk<CR>
+map <silent> <space>gd :Gdiffsplit<CR>
 " NERDTree
 nnoremap <silent> <F3> :NERDTreeToggle <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
