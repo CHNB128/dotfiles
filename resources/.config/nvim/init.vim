@@ -77,6 +77,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Greplace
+set grepprg=ag
+let g:grep_cmd_opts = '--line-numbers --noheading'
 " Easy motion
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
