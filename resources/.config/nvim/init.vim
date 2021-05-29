@@ -60,7 +60,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utils
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:get_visual_selection()
+function! GetVisualSelection()
     " Why is this not a built-in Vim script function?!
     let [line_start, column_start] = getpos("'<")[1:2]
     let [line_end, column_end] = getpos("'>")[1:2]
@@ -109,8 +109,8 @@ autocmd FileType html,css EmmetInstall
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
 command! Search :Ag
-command! -range SearchRange <line1>,<line2> call fzf#vim#ag(s:get_visual_selection())
-command! -range SearchWord <line1>,<line2> call fzf#vim#ag(expand("<cword>"))
+command! -range SearchRange <line1>,<line2> call fzf#vim#ag(GetVisualSelection())
+command! SearchWord call fzf#vim#ag(expand("<cexpr>"))
 command! -bang CurrentBufferDirectoryFiles call fzf#vim#files(expand('%:p:h'), <bang>0)
 " common
 command! ReloadConfig :so $HOME/.config/nvim/init.vim
