@@ -118,7 +118,7 @@ command! ReloadConfig :so $HOME/.config/nvim/init.vim
 " Mapings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Easy motion
-nmap s <Plug>(easymotion-overwin-f2)
+nmap <space>m <Plug>(easymotion-overwin-f2)
 " FZF
 vnoremap <silent> <space>ss :SearchRange<CR>
 nnoremap <silent> <space>sw :SearchWord<CR>
@@ -126,6 +126,7 @@ nnoremap <silent> <space>ss :Search<CR>
 nnoremap <silent> <space>?c :Commands <CR>
 nnoremap <silent> <space>?m :Maps <CR>
 nnoremap <silent> <space>b :Buffers <CR>
+nnoremap <silent> <space>fw :Windows <CR>
 nnoremap <silent> <space>ff :Files <CR>
 nnoremap <silent> <space>fd :CurrentBufferDirectoryFiles <CR>
 " Window managment
@@ -157,7 +158,9 @@ map <silent> <space>mh :BookmarkPrev<CR>
 map <silent> <space>ml :BookmarkNext<CR>
 " Git
 map <silent> <space>gu :GitGutterUndoHunk<CR>
-map <silent> <space>gb :Gblame<CR>
+map <silent> <space>gb :Git blame<CR>
+map <silent> <space>gk :GitGutterPrevHunk<CR>
+map <silent> <space>gj :GitGutterNextHunk<CR>
 " NERDTree
 nnoremap <silent> <F3> :NERDTreeToggle <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
