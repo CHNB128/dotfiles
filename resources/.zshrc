@@ -1,3 +1,4 @@
+"$HOME/.config/scripts/dracula-tty.sh"
 [[ -f $HOME/.config/envrc ]] && source ~/.config/envrc
 
 COMPLETION_WAITING_DOTS="true"
