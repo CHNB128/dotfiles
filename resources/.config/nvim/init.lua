@@ -53,5 +53,3 @@ opt.autoindent = true
 opt.smartindent = true
 -- stricter rules for C programs
 opt.cindent = true
-
-opt.termguicolors = true
