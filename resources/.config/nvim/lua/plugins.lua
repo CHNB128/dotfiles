@@ -368,4 +368,9 @@ return packer.startup(function(use)
     end,
   }
 
+  use {
+    'bhurlow/vim-parinfer',
+    ft = { 'clojure' },
+  }
+
 end)
