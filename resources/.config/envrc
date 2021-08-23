@@ -101,7 +101,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 ################################################################################
 # Vim (Cli Text editor)
 ################################################################################
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/nvim/init.vim" | source $MYVIMRC'
+export MYVIMRC=$XDG_CONFIG_HOME/nvim/init.lua
+export VIMINIT='source $MYVIMRC'
 ################################################################################
 # NVM
 ################################################################################
