@@ -159,7 +159,7 @@ return packer.startup(function(use)
     end,
     setup = function()
       map('n', '<leader>gs', ':Gitsigns stage_hunk <CR>', {})
-      map('n', '<leader>gu', ':Gitsigns undo_stage_hunk <CR>', {})
+      map('n', '<leader>gS', ':Gitsigns undo_stage_hunk <CR>', {})
       map('n', '<leader>gj', ':Gitsigns next_hunk <CR>', {})
       map('n', '<leader>gk', ':Gitsigns prev_hunk <CR>', {})
     end
