@@ -19,6 +19,7 @@ map('n', '<leader>wk', ':wincmd k <CR>', {})
 map('n', '<leader>wl', ':wincmd l <CR>', {})
 -- Tabs
 map('n', '<leader>tn', ':tabnew <CR>', {})
+map('n', '<leader>tq', ':tabclose <CR>', {})
 map('n', '<tab>', ':tabnext <CR>', {})
 map('n', '<s-tab>', ':tabprevious <CR>', {})
 -- Remove hightlight on esc press
@@ -35,6 +36,7 @@ opt.wrap = false
 --
 g.auto_save = true
 g.tokyonight_style = "night"
+opt.number = true
 opt.relativenumber = true
 opt.syntax = 'enable'
 -- Copy to clipboard
@@ -53,3 +55,4 @@ opt.autoindent = true
 opt.smartindent = true
 -- stricter rules for C programs
 opt.cindent = true
+opt.termguicolors = true
