@@ -21,7 +21,6 @@ if [[ -f $ANTIGEN_PATH ]]; then
 	antigen bundle adb
 	antigen bundle archlinux
 	antigen bundle history-substring-search
-  antigen bundle jamesob/desk shell_plugins/zsh
 
 	antigen bundle "MichaelAquilina/zsh-auto-notify"
 	antigen bundle unixorn/autoupdate-antigen.zshplugin
@@ -47,9 +46,5 @@ fi
 [[ -f $XDG_CONFIG_HOME/aliasrc ]] && source $XDG_CONFIG_HOME/aliasrc
 [[ -f $XDF_CONFIG_HOME/autostart ]] && source $XDG_CONFIG_HOME/autostart
 [[ -f $HOME/.rvm/scripts/rvm ]] && source "$HOME/.rvm/scripts/rvm"
-
-# Hook for desk activation
-[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
