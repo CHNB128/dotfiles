@@ -21,6 +21,9 @@ return packer.startup(function(use)
     event = 'VimEnter',
     config = function()
       cmd 'colorscheme tokyonight'
+    end,
+    setup = function ()
+      g.tokyonight_style = "night"
     end
   }
 
@@ -44,6 +47,53 @@ return packer.startup(function(use)
   use {
     'kabouzeid/nvim-lspinstall',
     event = "BufRead",
+  }
+
+  use 'folke/lsp-colors.nvim'
+
+  use {
+    "folke/trouble.nvim",
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      'folke/lsp-colors.nvim',
+    },
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end,
+    setup = function()
+      map('n', '<leader>jt', ':TroubleToggle <CR>', {})
+    end
+  }
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      g.timeoutlen = 500
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end,
+    setup = function()
+      map('n', '<leader>jo', ':TodoLocList <CR>', {})
+    end
   }
 
   use {
@@ -96,15 +146,14 @@ return packer.startup(function(use)
 
   use {
     'glepnir/galaxyline.nvim',
-      branch = 'main',
-      -- your statusline
-      config = function()
-        require('statusline')
-      end,
-      requires = {
-        'kyazdani42/nvim-web-devicons',
-        opt = true
-      }
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      opt = true
+    },
+    branch = 'main',
+    config = function()
+      require('statusline')
+    end,
   }
 
   use {
@@ -422,4 +471,7 @@ return packer.startup(function(use)
     end
   }
 
+  use {
+    'alvan/vim-closetag',
+  }
 end)

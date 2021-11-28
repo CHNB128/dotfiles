@@ -35,7 +35,6 @@ opt.linebreak = true
 opt.wrap = false
 --
 g.auto_save = true
-g.tokyonight_style = "night"
 opt.number = true
 opt.relativenumber = true
 opt.syntax = 'enable'
