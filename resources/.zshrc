@@ -29,7 +29,7 @@ if [[ -f $ANTIGEN_PATH ]]; then
 	antigen bundle zsh-users/zsh-syntax-highlighting
 	antigen bundle zsh-users/zsh-autosuggestions
 	antigen bundle gko/ssh-connect
-	antigen bundle CHNB128/enhancd
+	antigen bundle b4b4r07/enhancd
 
 	# Tell Antigen that you're done.
 	antigen apply
