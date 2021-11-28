@@ -1,0 +1,6 @@
+[**.html]
+indent_style = space
+indent_size = 2
+max_char = 80
+brace_style = expand
+wrap_attributes = force-aligned
