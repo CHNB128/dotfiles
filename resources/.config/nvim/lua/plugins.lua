@@ -52,8 +52,12 @@ return packer.startup(function(use)
 
   use {
     'williamboman/nvim-lsp-installer',
+  }
+
+  use {
     "neovim/nvim-lspconfig",
-    setup = function ()
+    after = "nvim-lsp-installer",
+    config = function()
       local lsp_installer = require("nvim-lsp-installer")
       lsp_installer.on_server_ready(function(server)
           local opts = {}
@@ -391,7 +395,6 @@ return packer.startup(function(use)
     setup = function()
       map('n', '<leader>ff', ':FzfLua files <CR>', {})
       map('n', '<leader>fs', ':FzfLua live_grep_native <CR>', {})
-      map('n', '<leader>fv', ':FzfLua grep_visual <CR>', {})
       map('n', '<leader>fb', ':FzfLua buffers <CR>', {})
       map('n', '<leader>ft', ':FzfLua <CR>', {})
       map('n', '<leader>gm', ':FzfLua git_branches <CR>', {})
