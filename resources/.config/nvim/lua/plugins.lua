@@ -165,6 +165,18 @@ return packer.startup(function(use)
      end,
   }
 
+  -- Git
+
+  use {
+    'tpope/vim-fugitive',
+    setup = function()
+      map('n', '<leader>gb', ':Git blame<CR>', {})
+      map('n', '<leader>gc', ':Git commit<CR>', {})
+      map('n', '<leader>gp', ':Git push<CR>', {})
+      map('n', '<leader>gl', ':Git pull<CR>', {})
+    end
+  }
+
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
@@ -215,6 +227,10 @@ return packer.startup(function(use)
       require('colorizer').setup()
       cmd "ColorizerReloadAllBuffers"
     end,
+  }
+
+  use {
+    'hrsh7th/cmp-nvim-lsp'
   }
 
   use {
@@ -364,16 +380,6 @@ return packer.startup(function(use)
   use {
     'bhurlow/vim-parinfer',
     ft = { 'clojure' },
-  }
-
-  use {
-    'tpope/vim-fugitive',
-    setup = function()
-      map('n', '<leader>gb', ':Git blame<CR>', {})
-      map('n', '<leader>gc', ':Git commit<CR>', {})
-      map('n', '<leader>gp', ':Git push<CR>', {})
-      map('n', '<leader>gl', ':Git pull<CR>', {})
-    end
   }
 
   use {
