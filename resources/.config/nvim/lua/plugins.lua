@@ -12,6 +12,10 @@ return packer.startup(function(use)
   }
 
   use {
+    'tpope/vim-repeat',
+  }
+
+  use {
     'andymass/vim-matchup',
     event = 'VimEnter'
   }
@@ -35,37 +39,43 @@ return packer.startup(function(use)
       require('nvim-treesitter.configs').setup {
         ensure_installed = {
            "lua",
+           "clojure",
         },
         highlight = {
            enable = true,
-           use_languagetree = true,
         },
      }
     end
   }
 
+  -- LSP
+
   use {
-    'kabouzeid/nvim-lspinstall',
-    event = "BufRead",
+    'williamboman/nvim-lsp-installer',
+    "neovim/nvim-lspconfig",
+    setup = function ()
+      local lsp_installer = require("nvim-lsp-installer")
+      lsp_installer.on_server_ready(function(server)
+          local opts = {}
+          server:setup(opts)
+      end)
+    end
   }
 
-  use 'folke/lsp-colors.nvim'
+  use {
+    'folke/lsp-colors.nvim',
+  }
 
   use {
     "folke/trouble.nvim",
     requires = {
       "kyazdani42/nvim-web-devicons",
-      'folke/lsp-colors.nvim',
     },
     config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("trouble").setup {}
     end,
     setup = function()
-      map('n', '<leader>jt', ':TroubleToggle <CR>', {})
+      map('n', '<leader>fp', ':TroubleToggle <CR>', {})
     end
   }
 
@@ -73,11 +83,7 @@ return packer.startup(function(use)
     "folke/which-key.nvim",
     config = function()
       g.timeoutlen = 500
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("which-key").setup {}
     end
   }
 
@@ -85,27 +91,10 @@ return packer.startup(function(use)
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-      require("todo-comments").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("todo-comments").setup {}
     end,
     setup = function()
-      map('n', '<leader>jo', ':TodoLocList <CR>', {})
-    end
-  }
-
-  use {
-    "neovim/nvim-lspconfig",
-    after = "nvim-lspinstall",
-    config = function()
-      require('lspinstall').setup() -- important
-
-      local servers = require('lspinstall').installed_servers()
-      for _, server in pairs(servers) do
-        require('lspconfig')[server].setup{}
-      end
+      map('n', '<leader>fo', ':TodoLocList <CR>', {})
     end
   }
 
@@ -115,22 +104,14 @@ return packer.startup(function(use)
     config = function()
       local lspsignature = require('lsp_signature')
       lspsignature.setup {
-         bind = true,
          doc_lines = 2,
-         floating_window = true,
          fix_pos = true,
-         hint_enable = true,
          hint_prefix = " ",
-         hint_scheme = "String",
-         use_lspsaga = false,
          hi_parameter = "Search",
          max_height = 22,
-         max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
          handler_opts = {
            border = "single", -- double, single, shadow, none
          },
-         zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-         padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
       }
     end
   }
@@ -194,96 +175,122 @@ return packer.startup(function(use)
     end,
     setup = function()
       map('n', '<leader>gs', ':Gitsigns stage_hunk <CR>', {})
-      map('n', '<leader>gS', ':Gitsigns undo_stage_hunk <CR>', {})
+      map('n', '<leader>gu', ':Gitsigns undo_stage_hunk <CR>', {})
       map('n', '<leader>gj', ':Gitsigns next_hunk <CR>', {})
       map('n', '<leader>gk', ':Gitsigns prev_hunk <CR>', {})
     end
   }
 
   use {
-     "Pocco81/AutoSave.nvim",
-     config = function()
+    "Pocco81/AutoSave.nvim",
+    config = function()
       require("autosave").setup {
          enabled = g.auto_save or false, -- takes boolean value from init.lua
-         execution_message = "autosaved at : " .. fn.strftime "%H:%M:%S",
          events = { "InsertLeave", }, --"TextChanged" },
-         conditions = {
-            exists = true,
-            filetype_is_not = {},
-            modifiable = true,
-         },
          clean_command_line_interval = 2500,
          on_off_commands = true,
-         write_all_buffers = false,
       }
-     end,
+    end,
   }
 
-   use {
-      "lukas-reineke/indent-blankline.nvim",
-      event = "BufRead",
-      config = function()
-        g.indentLine_enabled = 1
-        g.indent_blankline_char = "▏"
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    config = function()
+      g.indentLine_enabled = 1
+      g.indent_blankline_char = "▏"
 
-        g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer" }
-        g.indent_blankline_buftype_exclude = { "terminal" }
+      g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "packer" }
+      g.indent_blankline_buftype_exclude = { "terminal" }
 
-        g.indent_blankline_show_trailing_blankline_indent = false
-        g.indent_blankline_show_first_indent_level = false
-      end,
-   }
+      g.indent_blankline_show_trailing_blankline_indent = false
+      g.indent_blankline_show_first_indent_level = false
+    end,
+  }
 
-   use {
-      "norcalli/nvim-colorizer.lua",
-      event = "BufRead",
-      config = function()
-        require('colorizer').setup()
-        cmd "ColorizerReloadAllBuffers"
-      end,
-   }
+  use {
+    "norcalli/nvim-colorizer.lua",
+    event = "BufRead",
+    config = function()
+      require('colorizer').setup()
+      cmd "ColorizerReloadAllBuffers"
+    end,
+  }
 
-   use {
-      "hrsh7th/nvim-compe",
-      event = "InsertEnter",
-      config = function()
-        require("compe").setup {
-           enabled = true,
-           autocomplete = true,
-           debug = false,
-           documentation = true,
-           incomplete_delay = 400,
-           max_abbr_width = 100,
-           max_kind_width = 100,
-           max_menu_width = 100,
-           min_length = 1,
-           preselect = "enable",
-           source_timeout = 200,
-           source = {
-             buffer = { kind = "﬘", true },
-             luasnip = { kind = "﬌", true },
-             nvim_lsp = true,
-             nvim_lua = true,
-           },
-           throttle_time = 80,
+  use {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    config = function()
+      local cmp = require'cmp'
+      cmp.setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+            -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+          end,
+        },
+        mapping = {
+          ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+          ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+          ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+          ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+          ['<C-e>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+          }),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        },
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          -- { name = 'vsnip' }, -- For vsnip users.
+          -- { name = 'luasnip' }, -- For luasnip users.
+          -- { name = 'ultisnips' }, -- For ultisnips users.
+          -- { name = 'snippy' }, -- For snippy users.
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline('/', {
+        sources = {
+          { name = 'buffer' }
         }
-      end,
-      requires = {
-         {
-            "rafamadriz/friendly-snippets",
-            event = "InsertCharPre",
-         },
-      },
-   }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        })
+      })
+
+      -- Setup lspconfig.
+      local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+      -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+      require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
+        capabilities = capabilities
+      }
+    end,
+    requires = {
+       {
+          "rafamadriz/friendly-snippets",
+          event = "InsertCharPre",
+       },
+    },
+  }
 
   use {
     "kyazdani42/nvim-web-devicons",
     config = function ()
-	  require'nvim-web-devicons'.setup {
-      -- globally enable default icons (default to false)
-      -- will get overriden by `get_icons` option
-      default = true;
-    }
+      require'nvim-web-devicons'.setup {
+        default = true;
+      }
     end
   }
 
@@ -299,58 +306,10 @@ return packer.startup(function(use)
     config = function()
       -- following options are the default
       require'nvim-tree'.setup {
-        -- disables netrw completely
-        disable_netrw       = true,
-        -- hijack netrw window on startup
-        hijack_netrw        = true,
-        -- open the tree when running this setup function
-        open_on_setup       = false,
-        -- will not open on setup if the filetype is in this list
-        ignore_ft_on_setup  = {},
-        -- closes neovim automatically when the tree is the last **WINDOW** in the view
-        auto_close          = true,
-        -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
-        open_on_tab         = true,
-        -- hijack the cursor in the tree to put it at the start of the filename
-        hijack_cursor       = false,
-        -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-        update_cwd          = false,
-        -- show lsp diagnostics in the signcolumn
-        lsp_diagnostics     = true,
-        -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
-        update_focused_file = {
-          -- enables the feature
-          enable      = true,
-          -- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
-          -- only relevant when `update_focused_file.enable` is true
-          update_cwd  = false,
-          -- list of buffer names / filetypes that will not update the cwd if the file isn't found under the current root directory
-          -- only relevant when `update_focused_file.update_cwd` is true and `update_focused_file.enable` is true
-          ignore_list = {}
+        auto_close = true,
+        diagnostics = {
+          enable = true,
         },
-        -- configuration options for the system open command (`s` in the tree by default)
-        system_open = {
-          -- the command to run this, leaving nil should work in most cases
-          cmd  = nil,
-          -- the command arguments as a list
-          args = {}
-        },
-
-        view = {
-          -- width of the window, can be either a number (columns) or a string in `%`
-          width = 30,
-          -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
-          side = 'left',
-          -- if true the tree will resize itself after opening a file
-          auto_resize = false,
-          mappings = {
-            -- custom only false will merge the list with the default mappings
-            -- if true, it will only use your list to set the mappings
-            custom_only = false,
-            -- list of mappings to set on the tree manually
-            list = {}
-          }
-        }
       }
       local tree_cb = require'nvim-tree.config'.nvim_tree_callback
       -- default mappings
@@ -396,15 +355,9 @@ return packer.startup(function(use)
 
   use {
     "windwp/nvim-autopairs",
-    after = "nvim-compe",
+    after = "nvim-cmp",
     config = function()
-      local autopairs = require("nvim-autopairs")
-      local autopairs_completion = require("nvim-autopairs.completion.compe")
-      autopairs.setup()
-      autopairs_completion.setup {
-        map_complete = true, -- insert () func completion
-        map_cr = true,
-      }
+      require('nvim-autopairs').setup{}
     end,
   }
 
@@ -473,5 +426,23 @@ return packer.startup(function(use)
 
   use {
     'alvan/vim-closetag',
+  }
+
+  use {
+    'tveskag/nvim-blame-line',
+    event = "BufEnter",
+    config = function ()
+      cmd 'EnableBlameLine'
+    end
+  }
+
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup {}
+      map('n', '<leader>j', ':HopWord <CR>', {})
+    end
   }
 end)
