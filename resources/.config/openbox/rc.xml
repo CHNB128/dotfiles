@@ -40,7 +40,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Nightmare</name>
+    <name>Arc-Dark</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -55,7 +55,7 @@
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>sans</name>
+      <name>Fira Code Nerd Font</name>
       <size>8</size>
       <!-- font size in points -->
       <weight>bold</weight>
@@ -64,7 +64,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveWindow">
-      <name>sans</name>
+      <name>Fira Code Nerd Font</name>
       <size>8</size>
       <!-- font size in points -->
       <weight>bold</weight>
@@ -73,7 +73,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuHeader">
-      <name>sans</name>
+      <name>Fira Code Nerd Font</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>normal</weight>
@@ -82,7 +82,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuItem">
-      <name>sans</name>
+      <name>Fira Code Nerd Font</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>normal</weight>
@@ -91,7 +91,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="ActiveOnScreenDisplay">
-      <name>sans</name>
+      <name>Fira Code Nerd Font</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>bold</weight>
@@ -100,7 +100,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>sans</name>
+      <name>Fira Code Nerd Font</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>bold</weight>
@@ -239,12 +239,12 @@
     </keybind>
     <keybind key="A-F2">
       <action name="Execute">
-        <command>termite -e htop</command>
+        <command>alacritty -e htop</command>
       </action>
     </keybind>
     <keybind key="W-Return">
       <action name="Execute">
-        <command>termite</command>
+        <command>alacritty</command>
       </action>
     </keybind>
     <keybind key="XF86AudioRaiseVolume">
@@ -320,6 +320,31 @@
     <keybind key="W-5">
       <action name="GoToDesktop">
         <to>5</to>
+      </action>
+    </keybind>
+    <keybind key="W-6">
+      <action name="GoToDesktop">
+        <to>6</to>
+      </action>
+    </keybind>
+    <keybind key="W-7">
+      <action name="GoToDesktop">
+        <to>7</to>
+      </action>
+    </keybind>
+    <keybind key="W-8">
+      <action name="GoToDesktop">
+        <to>8</to>
+      </action>
+    </keybind>
+    <keybind key="W-9">
+      <action name="GoToDesktop">
+        <to>9</to>
+      </action>
+    </keybind>
+    <keybind key="W-10">
+      <action name="GoToDesktop">
+        <to>10</to>
       </action>
     </keybind>
     <keybind key="A-Escape">
@@ -729,7 +754,7 @@
         <height>100%</height>
       </size>
     </application>
-    <application name="termite">
+    <application name="alacritty">
       <focus>yes</focus>
       <decor>no</decor>
       <size>

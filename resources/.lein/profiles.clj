@@ -10,4 +10,9 @@
   :dependencies
   [[jonase/eastwood "0.2.1" :exclusions [org.clojure/clojure]]
    [cljfmt "0.5.1"]
-   [alembic "0.3.2"]]}}
+   [borkdude/jet "0.0.6"]
+   [alembic "0.3.2"]]
+  :aliases
+  {"jet" ["run" "-m" "jet.main"]}
+  :cljfmt {:remove-multiple-non-indenting-spaces? true
+           :split-keypairs-over-multiple-lines? true}}}

@@ -54,8 +54,4 @@ if [[ $OS == "Arch linux" ]];then
   alias pacman-autoremove="sudo pacman -R $(pacman -Qdtq)"
 fi
 
-# exercism
-alias exercism="HOME=$XDG_DATA_HOME exercism"
-
-# https://crates.io/crates/eureka
-alias idea="eureka"
+[[ $(command -v navi) ]] && alias n="navi"

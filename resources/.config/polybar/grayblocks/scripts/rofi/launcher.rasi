@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"Iosevka Nerd Font 10";
+	font:							"Ubuntu bold 10";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-drun: 					"";
@@ -95,20 +95,26 @@ element {
 }
 
 element-icon {
+    background-color:               @al;
     size:                           24px;
     border:                         0px;
 }
 
 element-text {
+    background-color:               @al;
+    text-color:                     @fg;
     expand:                         true;
     horizontal-align:               0;
     vertical-align:                 0.5;
     margin:                         0px 2.5px 0px 2.5px;
 }
 
-element selected {
-    background-color:               @bga;
+element-text selected {
     text-color:                     @fg;
+}
+
+element selected {
+    background-color:               @ac;
 	border:							0px 0px 0px 0px;
     border-radius:                  0px;
     border-color:                  	@ac;

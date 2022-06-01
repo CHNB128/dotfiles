@@ -176,7 +176,7 @@ output.even-row = ""
 
 # DSN to call by -D option
 [alias_dsn]
-# example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
+example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
 
 # Format for number representation
 # for decimal "d" - 12345678, ",d" - 12,345,678

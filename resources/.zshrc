@@ -40,8 +40,7 @@ fi
 [[ $(command -v bw) ]] && eval "$(bw completion --shell zsh); compdef _bw bw;"
 # https://github.com/starship/starship
 [[ $(command -v starship) ]] && eval "$(starship init zsh)"
-
-
+[[ -f /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 [[ -f $XDG_CONFIG_HOME/ssh/sshrc ]] && source $XDG_CONFIG_HOME/ssh/sshrc
 [[ -f $XDG_CONFIG_HOME/aliasrc ]] && source $XDG_CONFIG_HOME/aliasrc
 [[ -f $XDF_CONFIG_HOME/autostart ]] && source $XDG_CONFIG_HOME/autostart
