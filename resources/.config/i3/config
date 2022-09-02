@@ -218,17 +218,20 @@ bindsym $mod+Shift+s mode "sound"
 ################################################################################
 # Brightness
 ################################################################################
-set $bright ~/.config/scripts/bright.sh
 
 # For laptop
-bindsym XF86MonBrightnessUp   exec $bright +
-bindsym XF86MonBrightnessDown exec $bright -
+bindsym XF86MonBrightnessUp   exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 mode "brightness" {
-  bindsym k exec $bright +
-  bindsym j exec $bright -
+  bindsym k    exec brightnessctl s +10%
+  bindsym j    exec brightnessctl s 10%-
+  bindsym f    exec brightnessctl s 100%
+  bindsym m    exec brightnessctl s 10%
+  bindsym Up   exec brightnessctl s +10%
+  bindsym Down exec brightnessctl s 10%-
 
-  # back to normal: Enter or Escape or $mod+r
+  # back to normal
   bindsym Return mode "default"
   bindsym Escape mode "default"
   bindsym $mod+Shift+b mode "default"
