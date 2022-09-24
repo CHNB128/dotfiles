@@ -55,3 +55,16 @@ opt.smartindent = true
 -- stricter rules for C programs
 opt.cindent = true
 opt.termguicolors = true
+
+-- Lualine
+require('lualine').setup()
+
+-- Auto theme
+local hr = tonumber(os.date('%H', os.time()))
+if hr > 6 and hr < 21 then
+  vim.o.background = "light"
+  cmd 'colorscheme gruvbox'
+else -- night
+  vim.o.background = "dark"
+  cmd 'colorscheme tokyonight'
+end

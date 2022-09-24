@@ -1,8 +1,5 @@
 local packer = require('packer')
 
--- Auto-compile if plugin list was changed
-cmd('autocmd BufWritePost plugins.lua source <afile> | PackerCompile ')
-
 -- Packer setup
 return packer.startup(function(use)
 
@@ -20,16 +17,13 @@ return packer.startup(function(use)
     event = 'VimEnter'
   }
 
-  use {
-    'folke/tokyonight.nvim',
-    event = 'VimEnter',
-    config = function()
-      cmd 'colorscheme tokyonight'
-    end,
-    setup = function ()
-      g.tokyonight_style = "night"
-    end
-  }
+  use 'EdenEast/nightfox.nvim'
+
+  use 'ellisonleao/gruvbox.nvim'
+
+  use 'folke/tokyonight.nvim'
+
+  use 'projekt0n/github-nvim-theme'
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -133,15 +127,8 @@ return packer.startup(function(use)
   }
 
   use {
-    'glepnir/galaxyline.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-      opt = true
-    },
-    branch = 'main',
-    config = function()
-      require('eviline')
-    end,
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
 
   use {
