@@ -4,11 +4,10 @@
 setxkbmap -option grp:caps_toggle us,ru
 powerline-daemon -q &
 picom --config ~/.config/picom.conf -b &
-tmux new -d -s general &
 # Monitor setup
 xrandr --output HDMI-A-0 --left-of eDP &
 # Tray
-~/.config/polybar/launch.sh --grayblocks &
+~/.config/polybar/launch.sh --docky &
 ## Wallpapers
 # Random image from unsplash
 # ~/.config/scripts/unsplash_wallpaper.sh &
