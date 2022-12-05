@@ -1,0 +1,12 @@
+*
+!.gitignore
+!rofi
+!scripts
+!polybar
+!lvim
+!lvim
+!i3
+!systemd 
+!dunst 
+!envrc 
+!aliasrc 
