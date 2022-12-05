@@ -7,5 +7,5 @@ My dofiles
 ```
 git clone https://github.com/CHNB128/dotfiles
 cd dotfiles 
-./import.sh
+./auto.sh
 ```
