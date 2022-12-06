@@ -7,7 +7,7 @@ yay -S zsh exa bat starship fzf
 # Fonts 
 yay -S ttf-firacode-nerd
 # DE
-yay -S polybar rofi starship feh flameshot 
+yay -S polybar rofi starship feh flameshot picom
 # Admin
 yay -S htop docker docker-compose
 # Development
