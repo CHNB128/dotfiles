@@ -127,3 +127,30 @@ if [ $(command -v pyenv) ]; then
 fi
 # Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
+# MacOs
+case "$(uname -s)" in
+  Darwin)
+    # GO
+    export GOPATH=$HOME/go
+    export GOROOT="/usr/local/go"
+    export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+    # Android Studio
+    export ANDROID_HOME="${HOME}/Library/Android/sdk"
+    # NVM
+    # This loads nvm
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"
+    # This loads nvm bash_completion
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"
+  ;;
+  *)
+    # Android Studio
+    export ANDROID_HOME="${HOME}/Android/Sdk"
+  ;;
+esac
+# Android Studio
+export PATH="${PATH}:${ANDROID_HOME}/emulator"
+export PATH="${PATH}:${ANDROID_HOME}/tools"
+export PATH="${PATH}:${ANDROID_HOME}/tools/bin"
+export PATH="${PATH}:${ANDROID_HOME}/platform-tools"
+# rbenv
+eval "$(rbenv init - zsh)"
