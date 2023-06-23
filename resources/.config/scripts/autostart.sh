@@ -3,7 +3,7 @@
 # language to CapsLock
 setxkbmap -option grp:caps_toggle us,ru
 powerline-daemon -q &
-picom --config ~/.config/picom.conf -b &
+dunst &
 # Monitor setup
 xrandr --output HDMI-A-0 --left-of eDP &
 # Tray

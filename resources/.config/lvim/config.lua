@@ -8,6 +8,10 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+map = vim.api.nvim_set_keymap
+
+vim.opt.number = true -- set numbered lines
+vim.opt.relativenumber = true -- set relative numbered lines
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
@@ -71,16 +75,12 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  "c",
   "javascript",
   "json",
-  "lua",
   "python",
   "typescript",
   "tsx",
   "css",
-  "rust",
-  "java",
   "yaml",
 }
 
@@ -163,14 +163,56 @@ lvim.builtin.treesitter.highlight.enable = true
 -- }
 
 -- Additional Plugins
--- lvim.plugins = {
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
--- }
+lvim.plugins = {
+  {
+    'junegunn/vim-easy-align',
+  },
+  {
+    'gpanders/nvim-parinfer',
+  },
+  {
+    'sbdchd/neoformat',
+  },
+  {
+    'wakatime/vim-wakatime'
+  },
+  {
+    'EdenEast/nightfox.nvim',
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      vim.cmd "highlight default link gitblame SpecialComment"
+      vim.g.gitblame_enabled = 0
+    end,
+  },
+  {
+    "windwp/nvim-spectre",
+    event = "BufRead",
+    config = function()
+      require("spectre").setup()
+    end,
+    init = function()
+      map('n', '<leader>R', ':lua require("spectre").open()<CR>', {})
+      map('n', '<leader>rw', ':lua require("spectre").open_visual({select_word=true})<CR>', {})
+      map('v', '<leader>rv', ':lua require("spectre").open_visual()<CR>', {})
+      map('n', '<leader>rp', ':lua require("spectre").open_file_search()<CR>', {})
+    end
+  },
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*" },
+  command = "Neoformat",
+})
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   pattern = { "*.json", "*.jsonc" },
 --   -- enable wrap mode for json files only
