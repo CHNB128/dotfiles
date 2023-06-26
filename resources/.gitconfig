@@ -1,0 +1,14 @@
+[user]
+	name = Velichko Ilya
+	email = drake.aren@pm.me
+[pull]
+	rebase = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
+[init]
+	defaultBranch = master
