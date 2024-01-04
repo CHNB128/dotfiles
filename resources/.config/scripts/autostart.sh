@@ -18,5 +18,3 @@ xrandr --output HDMI-A-0 --left-of eDP &
 
 # Disable tuchpad while typing
 syndaemon -i 0.5 -t -K -R &
-# WIFI
-iwctl station wlan0 connect tenda1 &
