@@ -50,6 +50,8 @@ smart_borders on
 # Auto start
 ################################################################################
 assign [class="^firefox$"] → 2
+exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/alacritty'
 exec --no-startup-id ~/.config/scripts/autostart.sh
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
