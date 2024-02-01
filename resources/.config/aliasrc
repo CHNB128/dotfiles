@@ -1,7 +1,6 @@
 #!/bin/sh
 
 alias cat="bat"
-alias vi="lvim"
 alias l="exa -lah --git --group"
 #alias rm="rm -I --preserve-root"
 alias cp="cp -i"
