@@ -10,7 +10,7 @@ an executable
 
 map = vim.api.nvim_set_keymap
 
-vim.opt.number = true -- set numbered lines
+vim.opt.number = true         -- set numbered lines
 vim.opt.relativenumber = true -- set relative numbered lines
 -- general
 lvim.log.level = "warn"
