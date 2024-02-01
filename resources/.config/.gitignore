@@ -1,12 +1,16 @@
+# Ignore all files in the folder
 *
+
+# Except the specified files and folders
 !.gitignore
-!rofi
-!scripts
-!polybar
-!lvim
-!i3
-!alacritty
-!systemd 
-!dunst 
-!envrc 
-!aliasrc 
+!rofi/
+!scripts/
+!polybar/
+!lvim/
+!i3/
+!alacritty/
+!systemd/
+!dunst/
+!envrc
+!aliasrc
+
