@@ -35,7 +35,6 @@ if [[ -f $ANTIGEN_PATH ]]; then
 	antigen apply
 fi
 
-[[ $(command -v direnv) ]] && eval "$(direnv hook zsh)"
 [[ $(command -v navi) ]] && eval "$(navi widget zsh)"
 [[ $(command -v bw) ]] && eval "$(bw completion --shell zsh); compdef _bw bw;"
 # https://github.com/starship/starship
@@ -44,9 +43,6 @@ fi
 [[ -f $XDG_CONFIG_HOME/ssh/sshrc ]] && source $XDG_CONFIG_HOME/ssh/sshrc
 [[ -f $XDG_CONFIG_HOME/aliasrc ]] && source $XDG_CONFIG_HOME/aliasrc
 [[ -f $XDF_CONFIG_HOME/autostart ]] && source $XDG_CONFIG_HOME/autostart
-[[ -f $HOME/.rvm/scripts/rvm ]] && source "$HOME/.rvm/scripts/rvm"
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 # pnpm
 export PNPM_HOME="/home/gnome/.local/share/pnpm"
