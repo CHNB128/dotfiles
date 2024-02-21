@@ -23,8 +23,8 @@ lvim.colorscheme = "lunar"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -174,7 +174,28 @@ lvim.plugins = {
     'sbdchd/neoformat',
   },
   {
-    'wakatime/vim-wakatime'
+    'github/copilot.vim'
+  },
+  -- {
+  --   'wakatime/vim-wakatime'
+  -- },
+  {
+    "phaazon/hop.nvim",
+    event = "BufRead",
+    config = function()
+      require("hop").setup()
+      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
+    end,
+    init = function()
+      lvim.builtin.which_key.mappings["j"] = {
+        name = "Hop",
+        w = { "<cmd>:HopWord<cr>", "Word" },
+        a = { "<cmd>:HopAnywhere<cr>", "Anywhere" },
+        l = { "<cmd>:HopLine<cr>", "Line" },
+        c = { "<cmd>:HopChar2<cr>", "Two chars" },
+      }
+    end
   },
   {
     'EdenEast/nightfox.nvim',
