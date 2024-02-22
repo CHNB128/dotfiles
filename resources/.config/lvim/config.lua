@@ -221,10 +221,18 @@ lvim.plugins = {
       require("spectre").setup()
     end,
     init = function()
-      map('n', '<leader>R', ':lua require("spectre").open()<CR>', {})
-      map('n', '<leader>rw', ':lua require("spectre").open_visual({select_word=true})<CR>', {})
-      map('v', '<leader>rv', ':lua require("spectre").open_visual()<CR>', {})
-      map('n', '<leader>rp', ':lua require("spectre").open_file_search()<CR>', {})
+      -- map('n', '<leader>R', ':lua require("spectre").open()<CR>', {})
+      -- map('n', '<leader>rw', ':lua require("spectre").open_visual({select_word=true})<CR>', {})
+      -- map('v', '<leader>rv', ':lua require("spectre").open_visual()<CR>', {})
+      -- map('n', '<leader>rp', ':lua require("spectre").open_file_search()<CR>', {})
+      lvim.builtin.which_key.mappings["R"] = {
+        name = "Spectre",
+        r = { '<cmd>:lua require("spectre").open()<cr>', "Open" },
+        R = { '<cmd>:lua require("spectre").open_visual({select_word=true})<cr>', "Open visual (current word)" },
+        v = { '<cmd>:lua require("spectre").open_visual()<cr>', "Open visual" },
+        f = { '<cmd>:lua require("spectre").open_file_search()<cr>', "File search" },
+        F = { '<cmd>:lua require("spectre").open_file_search({select_word=true})<cr>', "File search" },
+      }
     end
   },
 }
