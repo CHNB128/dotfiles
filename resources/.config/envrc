@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # Define system type
 if [ -f /etc/os-release ]; then
   # freedesktop.org and systemd
@@ -30,70 +29,48 @@ else
 fi
 export DISTRIB_ID=$OS
 export DISTRIB_RELEASE=$VER
-
+# Terminal
 export TERMINAL="termite"
+export EDITOR="lvim"
 export TERM="xterm-256color"
-
 # XDG directories
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_LIB_HOME="$HOME/.local/lib"
 export XDG_CACHE_HOME="$HOME/.cache"
-
-export EDITOR="lvim"
-
 export PATH="$XDG_BIN_HOME:$PATH"
-################################################################################
 # SMAN
-################################################################################
 export SMAN_SNIPPET_DIR="~/.config/snippets"
-################################################################################
 # Rust
-################################################################################
 export PATH="$PATH:$HOME/.cargo/bin"
-################################################################################
 # LinuxBrew
-################################################################################
 export LINUXBREW_HOME="/home/linuxbrew"
 if [ -d $LINUXBREW_HOME ]; then
   export PATH="$PATH:$LINUXBREW_HOME/bin"
   export MANPATH="$(brew --prefix)/share/man:$MANPATH"
   export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 fi
-################################################################################
-# PHP
-################################################################################
-# Composer
+# Brew 
+export HOMEBREW_NO_AUTO_UPDATE=1
+# PHP Composer
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-################################################################################
 # Yarn
-################################################################################
 export PATH="$PATH:$(yarn global bin)"
 export PATH="$PATH:$HOME/.yarn/bin"
-################################################################################
 # GTK
-################################################################################
 export GTK_THEME=Adwaita:dark
-################################################################################
 # Golang
-################################################################################
 #export GOPATH="$XDG_DATA_HOME/go"
 export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
-################################################################################
 # Ruby
-################################################################################
 if [ $(command -v ruby) ]; then
   export PATH=$PATH:$GEM_HOME/bin
   export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 fi
-################################################################################
 # Haskell
-################################################################################
 export STACK_ROOT=$XDG_DATA_HOME/stack
-################################################################################
 # Android
-################################################################################
 export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export ANDROID_SDK_HOME=$HOME/.android
@@ -105,19 +82,14 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 # FZF
 FZF_DEFAULT_COMMAND=rg
-################################################################################
 # Vim (Cli Text editor)
-################################################################################
 export MYVIMRC=$XDG_CONFIG_HOME/nvim/init.lua
 export VIMINIT='source $MYVIMRC'
-################################################################################
-# NVM
-################################################################################
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+# nvm
+export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-################################################################################
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # SSH AGENT
-################################################################################
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # PYENV
 export PYENV_ROOT="$HOME/.pyenv"
@@ -152,6 +124,10 @@ export PATH="${PATH}:${ANDROID_HOME}/emulator"
 export PATH="${PATH}:${ANDROID_HOME}/tools"
 export PATH="${PATH}:${ANDROID_HOME}/tools/bin"
 export PATH="${PATH}:${ANDROID_HOME}/platform-tools"
+# pnpm
+export PNPM_HOME="/home/gnome/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+export PATH="$HOME/.docker/bin:$PATH"
 # rbenv
 if [ $(command -v rbenv) ]; then
   eval "$(rbenv init - zsh)"
