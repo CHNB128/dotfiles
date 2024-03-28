@@ -201,6 +201,9 @@ lvim.plugins = {
     'EdenEast/nightfox.nvim',
   },
   {
+     "rebelot/kanagawa.nvim"
+  },
+  {
     "windwp/nvim-ts-autotag",
     config = function()
       require("nvim-ts-autotag").setup()
