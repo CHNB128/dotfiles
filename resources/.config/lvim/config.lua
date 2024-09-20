@@ -201,9 +201,9 @@ lvim.plugins = {
   {
     'sbdchd/neoformat',
   },
-  -- {
-  --   'github/copilot.vim'
-  -- },
+  {
+    'github/copilot.vim'
+  },
   -- {
   --   'wakatime/vim-wakatime'
   -- },
