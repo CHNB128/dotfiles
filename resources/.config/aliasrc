@@ -1,6 +1,5 @@
 #!/bin/sh
 
-alias cat="bat"
 alias l="exa -lah --git --group"
 #alias rm="rm -I --preserve-root"
 alias cp="cp -i"
@@ -15,42 +14,8 @@ alias df="df -H"
 alias du="du -ch"
 alias rmf="rm -Rf"
 
-if command -v colordiff > /dev/null; then
-  alias diff="colordiff"
-fi
-
-# file
-alias metadata="exiftool"
-
-# network
-alias ports="ss -tlnp"
-alias process="ps aux"
-
 # power managment
 alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias halt="sudo /sbin/halt"
 alias shutdown="sudo /sbin/shutdown"
-
-# iptables
-alias ipt='sudo /sbin/iptables'
-alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
-alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
-alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
-alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
-alias firewall=iptlist
-
-# debian
-if [[ $DISTRIB_ID == ubuntu ]];then
-  alias apt="apt-get"
-  alias update="sudo apt-get --yes"
-  alias upgrade="sudo apt-get update && sudo apt-get upgrade"
-fi
-
-# archlinux
-if [[ $OS == "Arch linux" ]];then
-  alias pacman-list="pacman -Qe"
-  alias pacman-autoremove="sudo pacman -R $(pacman -Qdtq)"
-fi
-
-[[ $(command -v navi) ]] && alias n="navi"
