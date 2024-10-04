@@ -30,13 +30,10 @@ if [[ -f $ANTIGEN_PATH ]]; then
 	antigen bundle history-substring-search
 
 	antigen bundle "MichaelAquilina/zsh-auto-notify"
-	antigen bundle unixorn/autoupdate-antigen.zshplugin
 
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
 	antigen bundle zsh-users/zsh-autosuggestions
-	antigen bundle gko/ssh-connect
-	antigen bundle b4b4r07/enhancd
 
   antigen theme romkatv/powerlevel10k
 
@@ -44,7 +41,7 @@ if [[ -f $ANTIGEN_PATH ]]; then
 	antigen apply
 fi
 
-[[ $(command -v bw) ]] && eval "$(bw completion --shell zsh); compdef _bw bw;"
+[[ $(command -v zoxide) ]] && eval "$(zoxide init zsh)"
 [[ -f /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 [[ -f $XDG_CONFIG_HOME/ssh/sshrc ]] && source $XDG_CONFIG_HOME/ssh/sshrc
 [[ -f $XDG_CONFIG_HOME/aliasrc ]] && source $XDG_CONFIG_HOME/aliasrc

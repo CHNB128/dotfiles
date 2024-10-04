@@ -1,20 +1,10 @@
 #!/bin/sh
 
-# language to CapsLock
-setxkbmap -option grp:caps_toggle us,ru
-powerline-daemon -q &
-dunst &
-# Monitor setup
-xrandr --output HDMI-A-0 --left-of eDP &
-# Tray
-~/.config/polybar/launch.sh --docky &
-## Wallpapers
-# Random image from unsplash
-# ~/.config/scripts/unsplash_wallpaper.sh &
-# Previous image
-~/.fehbg &
-# Random from folder
-# ~/.config/scripts/random_wallpaper.sh ~/wallpapers
+set -e
 
-# Disable tuchpad while typing
-syndaemon -i 0.5 -t -K -R &
+setxkbmap -option grp:caps_toggle us,ru
+
+eval $(ssh-agent) &
+dunst &
+~/.fehbg &
+~/.config/polybar/launch.sh --docky &

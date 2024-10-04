@@ -16,7 +16,8 @@ vim.opt.relativenumber = true -- set relative numbered lines
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
 -- lvim.colorscheme = "kanagawa-lotus"
-lvim.colorscheme = "lunar"
+lvim.colorscheme = "dayfox"
+-- lvim.colorscheme = "github_light"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -220,6 +221,9 @@ lvim.plugins = {
   },
   {
     'EdenEast/nightfox.nvim',
+  },
+  {
+    "projekt0n/github-nvim-theme",
   },
   {
     "rebelot/kanagawa.nvim"

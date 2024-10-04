@@ -40,8 +40,6 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_LIB_HOME="$HOME/.local/lib"
 export XDG_CACHE_HOME="$HOME/.cache"
 export PATH="$XDG_BIN_HOME:$PATH"
-# SMAN
-export SMAN_SNIPPET_DIR="~/.config/snippets"
 # Rust
 export PATH="$PATH:$HOME/.cargo/bin"
 # LinuxBrew
@@ -126,3 +124,4 @@ export PATH="${PATH}:${ANDROID_HOME}/platform-tools"
 if [ $(command -v rbenv) ]; then
   eval "$(rbenv init - zsh)"
 fi
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
