@@ -16,8 +16,8 @@ vim.opt.relativenumber = true -- set relative numbered lines
 lvim.log.level = "warn"
 lvim.format_on_save.enabled = false
 -- lvim.colorscheme = "kanagawa-lotus"
-lvim.colorscheme = "dayfox"
--- lvim.colorscheme = "github_light"
+-- lvim.colorscheme = "dayfox"
+lvim.colorscheme = "github_light"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -249,10 +249,10 @@ lvim.plugins = {
       require("spectre").setup()
     end,
     -- init = function()
-      -- map('n', '<leader>R', ':lua require("spectre").open()<CR>', {})
-      -- map('n', '<leader>rw', ':lua require("spectre").open_visual({select_word=true})<CR>', {})
-      -- map('v', '<leader>rv', ':lua require("spectre").open_visual()<CR>', {})
-      -- map('n', '<leader>rp', ':lua require("spectre").open_file_search()<CR>', {})
+    -- map('n', '<leader>R', ':lua require("spectre").open()<CR>', {})
+    -- map('n', '<leader>rw', ':lua require("spectre").open_visual({select_word=true})<CR>', {})
+    -- map('v', '<leader>rv', ':lua require("spectre").open_visual()<CR>', {})
+    -- map('n', '<leader>rp', ':lua require("spectre").open_file_search()<CR>', {})
     -- end
   },
 }
@@ -260,8 +260,14 @@ lvim.plugins = {
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*" },
-  command = "Neoformat",
+  callback = function()
+    -- Remove trailing whitespace
+    vim.cmd([[%s/\s\+$//e]])
+    -- Format using Neoformat
+    vim.cmd("Neoformat")
+  end,
 })
+
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   pattern = { "*.json", "*.jsonc" },
 --   -- enable wrap mode for json files only
